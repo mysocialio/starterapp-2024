@@ -1,6 +1,7 @@
 import { createHandler } from 'graphql-http/lib/use/express'
 import { makeSchema } from './schema'
 import * as hooks from './hooks'
+import { ruruHTML } from 'ruru/server'
 
 const cache = {
     activeEtag: 0,
@@ -27,10 +28,7 @@ const createGraphQLMiddleware = async ({ settings, isDevOrTest }, ctx) => {
         mutations = {},
     } = settings
 
-    const config = {
-        graphiql: isDevOrTest,
-        ...(settings.config ? settings.config : {}),
-    }
+    const config = settings.config ? settings.config : {}
 
     // Build up the first cached schema so that any weird errors might
     // be checked out at boot time.
@@ -68,6 +66,7 @@ const createGraphQLMiddleware = async ({ settings, isDevOrTest }, ctx) => {
 
 export default ({ registerAction, registerHook, createHook, ...otherProps }) => {
     const isDevOrTest = [ 'development', 'test' ].includes(process.env.NODE_ENV)
+    const guiRoute = 'graphiql'
 
     // register services's hooks
     registerHook(hooks)
@@ -98,9 +97,27 @@ export default ({ registerAction, registerHook, createHook, ...otherProps }) => 
                 ...middlewares,
                 await createGraphQLMiddleware({
                     settings,
-                    isDevOrTest,
                 }, { registerAction, registerHook, createHook, ...otherProps }),
             ])
+
+            if (isDevOrTest) {
+                registerMiddleware(`/${guiRoute}`, (req, res) => {
+                    res.type('html')
+                    res.end(ruruHTML({ endpoint: mountPoint }))
+                })
+            }
+        },
+    })
+
+    registerAction({
+        hook: '$FINISH',
+        name: hooks.SERVICE_NAME,
+        trace: __filename,
+        handler: async ({ getConfig }) => {
+            if (isDevOrTest) {
+                const port = getConfig('express.port', process.env.REACT_APP_PORT || process.env.PORT || 8080)
+                console.log(`[express-graphql] GraphQL GUI is available at http://localhost:${port}/${guiRoute}`)
+            }
         },
     })
 }
