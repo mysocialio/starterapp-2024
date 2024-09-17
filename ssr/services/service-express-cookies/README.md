@@ -1,4 +1,4 @@
-# @forrestjs/service-express-cookies
+# service-express-cookies
 
 ForrestJS service which helps handling cookies in an ExpressJS server.
 
@@ -34,7 +34,7 @@ setting that is passed down to `res.cookie`.
 ## Configuration
 
 ```js
-const { runHookApp } = require('@forrestjs/hooks')
+const { runHookApp } = require('@alialfredji/hook-app')
 
 runHookApp({
     settings: {
@@ -52,8 +52,8 @@ runHookApp({
         }
     },
     services: [
-        require('@forrestjs/service-express'),
-        require('@forrestjs/service-express-cookies'),
+        require('ssr/services/service-express'),
+        require('ssr/services/service-express-cookies'),
     ],
     features: [
         ({ getHook }) => [getHook('EXPRESS_ROUTE'), ({ registerRoute }) => {

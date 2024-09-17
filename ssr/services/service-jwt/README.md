@@ -1,4 +1,4 @@
-# @forrestjs/service-jwt
+# service-jwt
 
 ForrestJS service which helps handling jwt activities. More or less it provides
 a _Promise_ wrapped `jsonwebtoken` module.
@@ -8,7 +8,7 @@ a _Promise_ wrapped `jsonwebtoken` module.
 `service-jwt` decorates the _Hooks App Context_ with a `jwt.sign()` and `jwt.verify()` helpers:
 
 ```js
-const hooks = require('@forrestjs/hooks')
+const hooks = require('@alialfredji/hook-app')
 hooks.registerAction({
     hook: hooks.FINISH,
     handler: async (args, ctx) => {
@@ -24,7 +24,7 @@ hooks.registerAction({
 After the _Hooks App_ initializes, you can simply import the helpers and use it straight:
 
 ```js
-const { sign, verify } = require('@forrestjs/service-jwt')
+const { sign, verify } = require('ssr/services/service-jwt')
 
 const token = await sign({ foo: 123 })
 const isValid = await verify(token)

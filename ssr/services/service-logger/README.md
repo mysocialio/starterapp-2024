@@ -1,4 +1,4 @@
-# @forrestjs/service-logger
+# service-logger
 
 ForrestJS service which helps logging stuff in the server. 
 It uses [winston](https://www.npmjs.com/package/winston) under the hood.
@@ -9,7 +9,7 @@ It uses [winston](https://www.npmjs.com/package/winston) under the hood.
 to access it from any action:
 
 ```js
-const hooks = require('@forrestjs/hooks')
+const hooks = require('@alialfredji/hook-app')
 hooks.registerAction({
     hook: hooks.FINISH,
     handler: (args, ctx) => {
@@ -22,7 +22,7 @@ After the Hooks App gets initialized, you can also access some direct logging me
 by importing them directly:
 
 ```js
-const logger = require('@forrestjs/service-logger')
+const logger = require('ssr/services/service-logger')
 logger.logInfo('test...')
 ```
 
@@ -48,7 +48,7 @@ hook before running `createHookApp`, as Service Logger hooks into `START` with t
 the rest of the app with a viable logging mechanism.
 
 ```js
-const serviceLogger = require('@forrestjs/service-logger')
+const serviceLogger = require('ssr/services/service-logger')
 
 registerAction({
     hook: serviceLogger.LOGGER_TRANSPORTS,

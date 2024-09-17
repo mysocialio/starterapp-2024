@@ -1,12 +1,12 @@
-# @forrestjs/service-postgres
+# service-postgres
 
 ForrestJS service which helps connecting to a Postgres server.
 
 ```js
-const { runHookApp } = require('@forrestjs/hooks')
-const serviceEnv = require('@forrestjs/service-env')
-const serviceLogger = require('@forrestjs/service-logger')
-const servicePostgres = require('@forrestjs/service-postgres')
+const { runHookApp } = require('@alialfredji/hook-app')
+const serviceEnv = require('ssr/services/service-env')
+const serviceLogger = require('ssr/services/service-logger')
+const servicePostgres = require('ssr/services/service-postgres')
 
 runHookApp({
     settings: async ({ getEnv, setConfig }) => {

@@ -1,4 +1,4 @@
-# @forrestjs/service-env
+# service-env
 
 ForrestJS service which helps importing environment variables from `.env.*` files:
 
@@ -19,11 +19,11 @@ that are bound to the execution context (your laptop, a production server).
 This service injects a `getEnv()` method into the Hooks App execution context:
 
 ```js
-const { runHookApp, FINISH } = require('@forrestjs/hooks')
+const { runHookApp, FINISH } = require('@alialfredji/hook-app')
 
 runHookApp({
     services: [
-        require('@forrestjs/service-env'),
+        require('ssr/services/service-env'),
     ],
     features: [
         [FINISH, (args, ctx) => console.log(getEnv('FOO'), 'default for "foo"')]
@@ -34,7 +34,7 @@ runHookApp({
 After the Hooks App gets initialized, you can also directly import `getEnv()`:
 
 ```js
-const { getEnv } = require('@forrestjs/service-env')
+const { getEnv } = require('ssr/services/service-env')
 ```
 
 

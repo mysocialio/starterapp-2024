@@ -1,9 +1,9 @@
-# @forrestjs/service-express-graphql
+# service-express-graphql
 
 ForrestJS service which sets up a _GraphQL_ endpoint in your _ExpressJS_ App.
 
 ```js
-const { runHookApp } = require('@forrestjs/hooks')
+const { runHookApp } = require('@alialfredji/hook-app')
 const { GraphQLString } = require('graphql')
 
 runHookApp({
@@ -25,8 +25,8 @@ runHookApp({
         },
     },
     services: [
-        require('@forrestjs/service-express'),
-        require('@forrestjs/service-express-graphql'),
+        require('ssr/services/service-express'),
+        require('ssr/services/service-express-graphql'),
     ],
 });
 ```

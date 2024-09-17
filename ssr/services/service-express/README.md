@@ -1,19 +1,15 @@
-# @forrestjs/service-express
+# service-express
 
-ForrestJS service which helps setting up an ExpressJS server.
+Service which helps setting up an ExpressJS server.
 
 ## Install & Setup
-
-```bash
-npm install --save @forrestjs/service-express
-```
 
 set it up in your ExpressJS App:
 
 ```js
 // index.js
-const { runHookApp } = require('@forrestjs/hooks')
-const { EXPRESS_ROUTE, ...expressService } = require('@forrestjs/service-express')
+const { runHookApp } = require('@alialfredji/hook-app')
+const { EXPRESS_ROUTE, ...expressService } = require('ssr/services/service-express')
 
 // Create an Home Page for the Web App
 const homePageRoute = (req, res) => res.send('Hello World')
@@ -61,7 +57,7 @@ It receives a direct referenct to the `app` and the `server`.
 This hook is good to inject custom App level middleware.
 
 ```js
-const { EXPRESS_MIDDLEWARE } = require('@forrestjs/service-express')
+const { EXPRESS_MIDDLEWARE } = require('ssr/services/service-express')
 
 registerAction({
     hook: EXPRESS_MIDDLEWARE,
@@ -76,7 +72,7 @@ registerAction({
 ### EXPRESS_ROUTE
 
 ```js
-const { EXPRESS_ROUTE } = require('@forrestjs/service-express')
+const { EXPRESS_ROUTE } = require('ssr/services/service-express')
 
 registerAction({
     hook: EXPRESS_ROUTE,
@@ -93,7 +89,7 @@ This hook is good to inject custom handlers or fallback routes that you
 want to be sure fire after any other.
 
 ```js
-const { EXPRESS_HANDLER } = require('@forrestjs/service-express')
+const { EXPRESS_HANDLER } = require('ssr/services/service-express')
 
 registerAction({
     hook: EXPRESS_HANDLER,
